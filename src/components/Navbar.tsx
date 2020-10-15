@@ -1,25 +1,36 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 
 type Props = {
   text?: string
 }
 
 const Navbar: React.FC<Props> = () => {
+  const history = useHistory()
   return (
     <nav>
       <div className="nav-wrapper red accent-3">
         <a href="/" className="brand-logo mx2">
-          Logo
+          localStorage
+          <sup
+            onClick={() => {
+              history.push("")
+            }}
+          >
+            JS
+          </sup>
         </a>
         <ul id="nav-mobile" className="right hide-on-med-and-down mx2">
           <li>
-            <a href="/">Sass</a>
+            <a href="/">
+              <sub>JS </sub>Typescript
+            </a>
           </li>
           <li>
-            <a href="/">Components</a>
+            <a href="/">React Router</a>
           </li>
           <li>
-            <a href="/">JavaScript</a>
+            <a href="/">Materialize</a>
           </li>
         </ul>
       </div>

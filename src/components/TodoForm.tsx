@@ -31,12 +31,12 @@ const [title, setTitle] = useState<string>("")
         /* value={title}
         onChange={changeHandler} */
         ref={ref}
-        placeholder="First Name"
+        placeholder="What should I do?"
         type="text"
         className="validate"
       />
 
-      <label htmlFor="first_name">First Name</label>
+      <label htmlFor="first_name">Todo:</label>
     </div>
   )
 }
