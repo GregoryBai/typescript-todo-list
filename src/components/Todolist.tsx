@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Todo } from "../types"
 
 type Props = {
@@ -7,6 +7,16 @@ type Props = {
   removeHandler: (id: number) => void
 }
 const Todolist: React.FC<Props> = ({ todos, toggleHandler, removeHandler }) => {
+  useEffect(() => {
+    console.log("Todolist mounted!")
+    return () => {
+      console.log("Todolist unmounted!")
+    }
+  }, [])
+  useEffect(() => {
+    console.log("Todolist rendered!")
+  })
+
   return (
     <ul>
       {todos.map((todo: Todo) => (

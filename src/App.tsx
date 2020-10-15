@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Navbar from "./components/Navbar"
 import TodoForm from "./components/TodoForm"
 import "./App.css"
@@ -10,6 +10,11 @@ const App: React.FC = () => {
     { title: "Feed the Dog", id: 23, completed: true },
   ])
 
+  useEffect(() => {
+    const savedTodos: Todo[] = JSON.parse(localStorage.getItem("todos") || "[]")
+    setTodos(savedTodos)
+  }, [])
+
   const addHandler = (title: string) => {
     const todo: Todo = {
       title,
@@ -18,6 +23,10 @@ const App: React.FC = () => {
     }
     setTodos((prev) => [...prev, todo])
   }
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
 
   const toggleHandler = (id: number): void => {
     setTodos((prev) =>
@@ -36,11 +45,15 @@ const App: React.FC = () => {
     <>
       <Navbar />
       <TodoForm addHandler={addHandler} />
-      <Todolist
-        todos={todos}
-        toggleHandler={toggleHandler}
-        removeHandler={removeHandler}
-      />
+      {todos.length ? (
+        <Todolist
+          todos={todos}
+          toggleHandler={toggleHandler}
+          removeHandler={removeHandler}
+        />
+      ) : (
+        <blockquote className="tac">Nothing to do!</blockquote>
+      )}
     </>
   )
 }
